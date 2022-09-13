@@ -1,4 +1,4 @@
-type Activity {
+type Activity @key(fields: "id") {
   id: ID!
   name: String
   registerable: Boolean
@@ -27,4 +27,9 @@ type Activity {
   Registrations: [Registration]
   Settlements: [Settlement]
   Ventures: [Venture]
+}
+
+extend type Query {
+  activities: [Activity]
+  activity(id: ID!): Activity
 }

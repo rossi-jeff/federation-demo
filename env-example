@@ -1,0 +1,3 @@
+ORGANIZATION_DATABASE_URL="postgresql://<put your name here>@localhost:5432/manage_organization"
+PERSON_DATABASE_URL="postgresql://<put your name here>@localhost:5432/manage_person"
+ACTIVITY_DATABASE_URL="postgresql://<put your name here>@localhost:5432/manage_activity"

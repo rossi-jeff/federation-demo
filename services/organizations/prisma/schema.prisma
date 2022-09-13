@@ -1,0 +1,156 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("ORGANIZATION_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../../../generated/organization-db"
+}
+
+model Award {
+  id              Int      @id @default(autoincrement())
+  name            String?
+  position        Int?
+  organization_id Int?
+  active          Boolean? @default(true)
+  created_at      DateTime
+  updated_at      DateTime
+
+  Organization Organization? @relation(fields: [organization_id], references: [id])
+
+  @@map("awards")
+}
+
+model CustomQuestion {
+  id               Int      @id @default(autoincrement())
+  organization_id  Int?
+  state            String?
+  question         String?
+  question_type    String?
+  question_options String?
+  active           Boolean?
+  required         Boolean? @default(false)
+  dependent_on     Int?
+  dependent_answer String?
+  sort_order       Int?
+  activity_type    String?
+  created_at       DateTime
+  updated_at       DateTime
+
+  Organization Organization? @relation(fields: [organization_id], references: [id])
+
+  @@map("custom_questions")
+}
+
+model LegalForm {
+  id                       Int      @id @default(autoincrement())
+  name                     String?
+  checkbox_text            String?
+  email_to_child           Boolean?
+  file                     String?
+  organization_id          Int?
+  require_student_sign_off Boolean?
+  state                    Int?     @default(0)
+  created_at               DateTime
+  updated_at               DateTime
+
+  Organization Organization? @relation(fields: [organization_id], references: [id])
+
+  @@map("legal_forms")
+}
+
+model LegalVideo {
+  id                       Int      @id @default(autoincrement())
+  name                     String?
+  checkbox_text            String?
+  remote_id                String?
+  organization_id          Int?
+  require_student_sign_off Boolean?
+  created_at               DateTime
+  updated_at               DateTime
+
+  Organization Organization? @relation(fields: [organization_id], references: [id])
+
+  @@map("legal_videos")
+}
+
+model MedicalForm {
+  id              Int      @id @default(autoincrement())
+  name            String?
+  file            String?
+  freshman_only   Boolean?
+  organization_id Int?
+  created_at      DateTime
+  updated_at      DateTime
+
+  Organization Organization? @relation(fields: [organization_id], references: [id])
+
+  @@map("medical_forms")
+}
+
+model Organization {
+  id                   Int      @id @default(autoincrement())
+  name                 String?
+  subdomain            String?
+  active               Boolean? @default(false)
+  a2k_link_school_id   Int?
+  color1               String?
+  color2               String?
+  sub_merchant_id      String?
+  latitude             String?
+  longitude            String?
+  phone                String?
+  fax                  String?
+  mascot               String?
+  feeder_towns         String?
+  address_id           Int?     @unique
+  flat_fee             Int?     @default(75)
+  percentage_fee       Int?     @default(1)
+  manual_fee           Int?     @default(100)
+  cc_fee               Int?     @default(375)
+  taking_payments      Boolean?
+  payment_options      Int?     @default(0)
+  spending_cap_max     Int?     @default(0)
+  payment_code         String?  @default("")
+  sms_messaging        Boolean? @default(false)
+  flat_fee_camp        Int?     @default(200)
+  percentage_fee_camp  Int?     @default(1)
+  flat_fee_event       Int?     @default(75)
+  percentage_fee_event Int?     @default(1)
+  oh_physical_url      String?
+  notifications        Int?     @default(0)
+  notes                String?  @db.Text
+  flat_fee_band        Int?     @default(75)
+  percentage_fee_band  Int?     @default(1)
+  custom_website_url   String?
+  features             Int?     @default(0)
+  kind                 String?  @default("High School")
+  tracked              Boolean? @default(false)
+  ach_flat_fee         Int?     @default(100)
+  created_at           DateTime
+  updated_at           DateTime
+
+  Awards          Award[]
+  CustomQuestions CustomQuestion[]
+  LegalForms      LegalForm[]
+  LegalVideos     LegalVideo[]
+  MedicalForms    MedicalForm[]
+  PaymentCodes    PaymentCode[]
+
+  @@map("organizations")
+}
+
+model PaymentCode {
+  id              Int      @id @default(autoincrement())
+  name            String?
+  code            String?
+  active          Boolean? @default(true)
+  organization_id Int?
+  created_at      DateTime
+  updated_at      DateTime
+
+  Organization Organization? @relation(fields: [organization_id], references: [id])
+
+  @@map("payment_codes")
+}

@@ -1,0 +1,256 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("ACTIVITY_DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../../../generated/activity-db"
+}
+
+model Activity {
+    id                      Int      @id @default(autoincrement())
+    name                    String
+    registerable            Boolean  @default(false)
+    organization_id         Int?
+    created_at              DateTime
+    updated_at              DateTime
+    steps                   Int      @default(0)
+    fee                     Int?
+    email_footer            String?
+    terms_and_conditions    String?
+    kind                    String?
+    lead_in_message         String?
+    no_cut                  Boolean  @default(false)
+    current_season          String   @default("current season")
+    discounted_fee          Int?
+    spirit_wear_link        String?
+    athletic_season         String   @default("none")
+    rosterwebservice_access Boolean  @default(false)
+    archived                Boolean  @default(false)
+
+    ActivityLegalForms                   ActivityLegalForm[]
+    CustomDiscounts                      CustomDiscount[]
+    Events                               Event[]
+    Groups                               Group[]
+    Messages                             Message[]
+    ParticipantInformationConfigurations ParticipantInformationConfiguration[]
+    Registrations                        Registration[]
+    Settlements                          Settlement[]
+    Ventures                             Venture[]
+
+    @@index([organization_id, name])
+    @@index([organization_id])
+    @@map("activities")
+}
+
+model ActivityLegalForm {
+    id            Int @id @default(autoincrement())
+    activity_id   Int
+    legal_form_id Int
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([activity_id, legal_form_id])
+    @@index([activity_id])
+    @@map("activity_legal_forms")
+}
+
+model CustomDiscount {
+    id                  Int      @id @default(autoincrement())
+    organization_id     Int?
+    kind                String?
+    condition           Int?
+    active              Boolean? @default(true)
+    discounted_fee      Int?
+    activity_id         Int?
+    secondary_condition String?
+    created_at          DateTime
+    updated_at          DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([organization_id])
+    @@map("custom_discounts")
+}
+
+model Event {
+    id                  Int       @id @default(autoincrement())
+    activity_id         Int?
+    name                String?
+    description         String?   @db.Text()
+    registerable        Boolean?  @default(false)
+    director            String?
+    start_time          DateTime? @db.Time()
+    end_time            DateTime? @db.Time()
+    student_only        Boolean?  @default(false)
+    location            String?
+    registration_start  DateTime? @db.Date
+    registration_end    DateTime? @db.Date
+    cancelled           Boolean?  @default(false)
+    state               Int?      @default(0)
+    event_date          DateTime? @db.Date
+    max_ticket_capacity Int?
+    created_at          DateTime
+    updated_at          DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([activity_id])
+    @@index([registerable])
+    @@map("events")
+}
+
+model Group {
+    id                      Int      @id @default(autoincrement())
+    activity_id             Int?
+    name                    String?
+    level                   String?
+    gender                  String?
+    a2k_siteschoolsport_id  Int?
+    sport_name              String?
+    rosterwebservice_access Boolean? @default(false)
+    state                   Int?     @default(0)
+    created_at              DateTime
+    updated_at              DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([a2k_siteschoolsport_id])
+    @@index([activity_id])
+    @@map("groups")
+}
+
+model Message {
+    id                    Int      @id @default(autoincrement())
+    organization_id       Int?
+    activity_id           Int?
+    venture_id            Int?
+    status                String?
+    message               String?  @db.Text
+    created_at            DateTime
+    group_id              Int?
+    sender_id             Int?
+    event_id              Int?
+    message_type          Int?     @default(0)
+    superadmin_message    Boolean? @default(false)
+    document_file_name    String?
+    document_content_type String?
+    document_file_size    Int?
+    document_updated_at   DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([organization_id, sender_id, created_at])
+    @@index([superadmin_message])
+    @@map("messages")
+}
+
+model ParticipantInformationConfiguration {
+    id              Int      @id @default(autoincrement())
+    activity_id     Int?
+    key             String?
+    visible         Boolean?
+    required        Boolean?
+    organization_id Int?
+    activity_kind   String?
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@map("participant_information_configurations")
+}
+
+model Registration {
+    id                      Int      @id @default(autoincrement())
+    activity_id             Int?
+    participant_id          Int?
+    registered_by_id        Int?
+    paid                    Boolean? @default(false)
+    season                  String?
+    group_id                Int?
+    tshirt_size             String?
+    weight                  Int?
+    height                  Int?
+    comment                 String?  @db.Text
+    tryout                  Boolean? @default(false)
+    state                   Int?     @default(0)
+    payment_options_comment String?  @db.Text
+    participation_status    String?
+    payment_code_id         Int?
+    short_size              String?
+    equipment_jersey_size   String?
+    equipment_pant_size     String?
+    equipment_jacket_size   String?
+    equipment_shoe_size     String?
+    created_at              DateTime
+    updated_at              DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([activity_id, group_id])
+    @@index([activity_id, state, season])
+    @@index([activity_id])
+    @@index([participant_id])
+    @@index([registered_by_id])
+    @@index([state, season])
+    @@map("registrations")
+}
+
+model Settlement {
+    id                Int       @id @default(autoincrement())
+    activity_id       Int?
+    organization_id   Int?
+    start_date        DateTime? @db.Date
+    end_date          DateTime? @db.Date
+    amount_collected  Int?
+    fees              Int?
+    amount_settled    Int?
+    percentage        Int?
+    amount_paid       Int?
+    amount_remaining  Int?
+    final             Boolean?
+    flat_fee          Int?
+    percentage_fee    Int?
+    manual_fee        Int?
+    participant_count Int?
+    kind              Int?      @default(0)
+    approval          Int?      @default(0)
+    activity_kind     String
+    created_at        DateTime
+    updated_at        DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@map("settlements")
+}
+
+model Venture {
+    id                         Int       @id @default(autoincrement())
+    name                       String?
+    description                String?   @db.Text
+    type                       String?
+    gender                     String?
+    grade                      String?
+    base_price                 Int?
+    non_district_base_price    Int?
+    registration_start         DateTime? @db.Date
+    registration_end           DateTime? @db.Date
+    director                   String?
+    director_bio               String?   @db.Text
+    registerable               Boolean?  @default(false)
+    activity_id                Int?
+    max_number_of_participants Int?      @default(0)
+    location                   String?
+    cancelled                  Boolean?  @default(false)
+    state                      Int?      @default(0)
+    season                     String?
+    source_venture_id          Int?
+    created_at                 DateTime
+    updated_at                 DateTime
+
+    Activity Activity? @relation(fields: [activity_id], references: [id])
+
+    @@index([activity_id])
+    @@index([registerable])
+    @@map("ventures")
+}

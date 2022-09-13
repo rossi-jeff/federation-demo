@@ -1,0 +1,246 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("PERSON_DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output = "../../../generated/person-db"
+}
+
+model Affiliation {
+    id               Int      @id @default(autoincrement())
+    person_id        Int?
+    organization_id  Int?
+    affiliation_type String?
+    created_at       DateTime
+    updated_at       DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@index([organization_id, affiliation_type])
+    @@map("affiliations")
+}
+
+model AlergicCondition {
+    id                Int      @id @default(autoincrement())
+    allergy_condition String?
+    severity          String?
+    reaction          String?
+    person_id         Int?
+    created_at        DateTime
+    updated_at        DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@map("alergic_conditions")
+}
+
+model CoachCertification {
+    id         Int      @id @default(autoincrement())
+    person_id  Int?
+    value      String?
+    state      String?
+    code       String?
+    created_at DateTime
+    updated_at DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@index([person_id])
+    @@map("coach_certifications")
+}
+
+model CoachingRole {
+    id         Int      @id @default(autoincrement())
+    person_id  Int?
+    group_id   Int?
+    position   String?
+    venture_id Int?
+    created_at DateTime
+    updated_at DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@index([group_id])
+    @@index([venture_id])
+    @@map("coaching_roles")
+}
+
+model CustomAnswer {
+    id          Int      @id @default(autoincrement())
+    person_id   Int?
+    question_id Int?
+    answer      String?  @db.Text()
+    created_at  DateTime
+    updated_at  DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@map("custom_answers")
+}
+
+model DirectingRole {
+    id         Int      @id @default(autoincrement())
+    person_id  Int
+    event_id   Int
+    created_at DateTime
+    updated_at DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@map("directing_roles")
+}
+
+model EmergencyContact {
+    id           Int      @id @default(autoincrement())
+    person_id    Int?
+    first_name   String?
+    last_name    String?
+    phone_number String?
+    relationship String?
+    created_at   DateTime
+    updated_at   DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@index([person_id])
+    @@map("emergency_contacts")
+}
+
+model Invite {
+    id              Int     @id @default(autoincrement())
+    person_id       Int?
+    invited_by_id   Int?
+    organization_id Int?
+    accepted        Boolean @default(false)
+    secret          String
+
+    Recipient Person? @relation(fields: [person_id], references: [id], name: "recipient")
+    InvitedBy Person? @relation(fields: [invited_by_id], references: [id], name: "invited_by")
+
+    @@map("invites")
+}
+
+model InvoiceTransaction {
+    id                Int       @id @default(autoincrement())
+    remote_id         String?
+    status            String?
+    invoice_id        Int?      @unique
+    payment_type      String?
+    admin_flag        Boolean?  @default(true)
+    problem_status_at DateTime?
+    details           String?   @db.Text
+
+    Invoice Invoice? @relation(fields: [invoice_id], references: [id])
+
+    @@index([invoice_id])
+    @@map("invoice_transactions")
+}
+
+model Invoice {
+    id                     Int      @id @default(autoincrement())
+    person_id              Int?
+    credit                 Int?     @default(0)
+    invoice_transaction_id Int?
+    created_at             DateTime
+    updated_at             DateTime
+
+    Person             Person?             @relation(fields: [person_id], references: [id])
+    InvoiceTransaction InvoiceTransaction?
+
+    @@map("invoices")
+}
+
+model LegalVideoConsent {
+    id             Int      @id @default(autoincrement())
+    legal_video_id Int?
+    person_id      Int?
+    season         String?
+    created_at     DateTime
+    updated_at     DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@index([legal_video_id])
+    @@index([person_id])
+    @@map("legal_video_consents")
+}
+
+model MedicalCondition {
+    id                Int       @id @default(autoincrement())
+    name              String?
+    physician         String?
+    date_of_diagnosis DateTime? @db.Date
+    emergency_plan    String?
+    person_id         Int?
+    created_at        DateTime
+    updated_at        DateTime
+
+    Person Person? @relation(fields: [person_id], references: [id])
+
+    @@index([person_id])
+    @@map("medical_conditions")
+}
+
+model Person {
+    id                              Int       @id @default(autoincrement())
+    username                        String?
+    password                        String?
+    allowed_to_login                Boolean?  @default(false)
+    first_name                      String?
+    last_name                       String?
+    sex                             String?
+    cell_phone                      String?
+    home_phone                      String?
+    office_phone                    String?
+    birth_date                      DateTime? @db.Date
+    high_school_graduation_year     Decimal?  @db.Decimal(4, 0)
+    insurance_company               String?
+    insurance_account_number        String?
+    physician_name                  String?
+    physician_phone                 String?
+    student_id                      String?
+    school_transferred_from         String?
+    medical_information             String?   @db.Text
+    accepts_COPPA                   Boolean?
+    opts_in_to_communications       Boolean?  @default(true)
+    address_id                      Int?
+    physical_date                   DateTime? @db.Date
+    registered_with_organization_id Int?
+    credit                          Int?
+    ethnicity                       String?
+    first_enrollment_date           DateTime? @db.Date
+    participation_status            String?
+    gpa                             Float?
+    felony_info                     Int?      @default(0)
+    secondary_email                 String?
+    notifications                   Int?      @default(31)
+    concussion_test_date            DateTime? @db.Date
+    secondary_email_2               String?
+    secondary_email_3               String?
+    ad_data                         String?   @db.Text
+    secondary_cell_phone_1          String?
+    secondary_cell_phone_2          String?
+    secondary_cell_phone_3          String?
+    created_at                      DateTime
+    updated_at                      DateTime
+
+    Affiliations        Affiliation[]
+    AlergicConditions   AlergicCondition[]
+    CoachCertifications CoachCertification[]
+    CoachingRoles       CoachingRole[]
+    CustomAnswers       CustomAnswer[]
+    DirectingRoles      DirectingRole[]
+    EmergencyContacts   EmergencyContact[]
+    Invoices            Invoice[]
+    LegalVideoConsents  LegalVideoConsent[]
+    MedicalConditions   MedicalCondition[]
+    InviteSent          Invite[]             @relation("invited_by")
+    InvitesReceived     Invite[]             @relation("recipient")
+
+    @@index([first_name])
+    @@index([last_name])
+    @@index([username])
+    @@map("people")
+}

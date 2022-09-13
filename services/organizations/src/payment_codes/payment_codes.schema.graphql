@@ -1,0 +1,11 @@
+type PaymentCode {
+  id: ID!
+  name: String
+  code: String
+  active: Boolean
+  organization_id: Int
+  created_at: String
+  updated_at: String
+
+  Organization: Organization
+}

@@ -1,0 +1,11 @@
+type MedicalForm {
+  id: ID!
+  name: String
+  file: String
+  freshman_only: Boolean
+  organization_id: Int
+  created_at: String
+  updated_at: String
+
+  Organization: Organization
+}

@@ -1,0 +1,11 @@
+type Award {
+  id: ID!
+  name: String
+  position: Int
+  organization_id: Int
+  active: Boolean
+  created_at: String
+  updated_at: String
+
+  Organization: Organization
+}

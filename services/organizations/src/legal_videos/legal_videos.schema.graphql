@@ -1,0 +1,12 @@
+type LegalVideo {
+  id: ID!
+  name: String
+  checkbox_text: String
+  remote_id: String
+  organization_id: Int
+  require_student_sign_off: Boolean
+  created_at: String
+  updated_at: String
+
+  Organization: Organization
+}

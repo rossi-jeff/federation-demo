@@ -10,13 +10,17 @@
     "generate:people": "cd services/people/ && npx prisma generate",
     "push:organizations": "cd services/organizations/ && npx prisma db push",
     "push:activities": "cd services/activities/ && npx prisma db push",
-    "push:people": "cd services/people/ && npx prisma db push"
+    "push:people": "cd services/people/ && npx prisma db push",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "author": "Jeff Rossi",
   "license": "ISC",
   "devDependencies": {
+    "@graphql-codegen/cli": "2.12.0",
     "concurrently": "^7.4.0",
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "@graphql-codegen/typescript": "2.7.3",
+    "@graphql-codegen/typescript-resolvers": "2.7.3"
   },
   "dependencies": {
     "@apollo/gateway": "^2.1.1",

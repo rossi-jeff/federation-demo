@@ -1,0 +1,11 @@
+type AlergicCondition {
+  id: ID!
+  allergy_condition: String
+  severity: String
+  reaction: String
+  person_id: Int
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

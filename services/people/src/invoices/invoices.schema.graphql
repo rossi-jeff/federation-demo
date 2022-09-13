@@ -1,0 +1,10 @@
+type Invoice {
+  id: ID!
+  person_id: Int
+  credit: Int
+  invoice_transaction_id: Int
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

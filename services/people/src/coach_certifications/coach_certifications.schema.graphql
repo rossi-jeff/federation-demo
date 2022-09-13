@@ -1,0 +1,11 @@
+type CoachCertification {
+  id: ID!
+  person_id: Int
+  value: String
+  state: String
+  code: String
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

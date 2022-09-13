@@ -1,0 +1,11 @@
+type Invite {
+  id: ID!
+  person_id: Int
+  invited_by_id: Int
+  organization_id: Int
+  accepted: Boolean
+  secret: String
+
+  Recipient: Person
+  InvitedBy: Person
+}

@@ -1,0 +1,10 @@
+type Affiliation {
+  id: ID!
+  person_id: Int
+  organization_id: Int
+  affiliation_type: String
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

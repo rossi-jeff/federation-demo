@@ -1,0 +1,11 @@
+type CoachingRole {
+  id: ID!
+  person_id: Int
+  group_id: Int
+  position: String
+  venture_id: Int
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

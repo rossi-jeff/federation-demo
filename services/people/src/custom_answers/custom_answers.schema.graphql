@@ -1,0 +1,10 @@
+type CustomAnswer {
+  id: ID!
+  person_id: Int
+  question_id: Int
+  answer: String
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

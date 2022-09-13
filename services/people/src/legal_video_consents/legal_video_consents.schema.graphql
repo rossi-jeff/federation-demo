@@ -1,0 +1,10 @@
+type LegalVideoConsent {
+  id: ID!
+  legal_video_id: Int
+  person_id: Int
+  season: String
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

@@ -1,0 +1,12 @@
+type EmergencyContact {
+  id: ID!
+  person_id: Int
+  first_name: String
+  last_name: String
+  phone_number: String
+  relationship: String
+  created_at: String
+  updated_at: String
+
+  Person: Person
+}

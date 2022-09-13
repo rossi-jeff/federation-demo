@@ -1,0 +1,10 @@
+type InvoiceTransaction {
+  id: ID!
+  remote_id: String
+  status: String
+  invoice_id: Int
+  payment_type: String
+  admin_flag: Boolean
+  problem_status_at: String
+  details: String
+}

@@ -1,0 +1,30 @@
+type Activity {
+  id: ID!
+  name: String
+  registerable: Boolean
+  created_at: String
+  updated_at: String
+  steps: Int
+  fee: Int
+  email_footer: String
+  terms_and_conditions: String
+  kind: String
+  lead_in_message: String
+  no_cut: Boolean
+  current_season: String
+  discounted_fee: Int
+  spirit_wear_link: String
+  athletic_season: String
+  rosterwebservice_access: Boolean
+  archived: Boolean
+
+  ActivityLegalForms: [ActivityLegalForm]
+  CustomDiscounts: [CustomDiscount]
+  Events: [Event]
+  Groups: [Group]
+  Messages: [Message]
+  ParticipantInformationConfigurations: [ParticipantInformationConfiguration]
+  Registrations: [Registration]
+  Settlements: [Settlement]
+  Ventures: [Venture]
+}

@@ -1,0 +1,7 @@
+type ActivityLegalForm {
+  id: ID!
+  activity_id: Int
+  legal_form_id: Int
+
+  Activity: Activity
+}

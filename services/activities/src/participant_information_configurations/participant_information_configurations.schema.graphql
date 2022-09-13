@@ -1,0 +1,9 @@
+type ParticipantInformationConfiguration {
+  id: ID!
+  activity_id: Int
+  key: String
+  visible: Boolean
+  required: Boolean
+  organization_id: Int
+  activity_kind: String
+}

@@ -1,0 +1,26 @@
+type Venture {
+  id: ID!
+  name: String
+  description: String
+  type: String
+  gender: String
+  grade: String
+  base_price: Int
+  non_district_base_price: Int
+  registration_start: String
+  registration_end: String
+  director: String
+  director_bio: String
+  registerable: Boolean
+  activity_id: Int
+  max_number_of_participants: Int
+  location: String
+  cancelled: Boolean
+  state: Int
+  season: String
+  source_venture_id: Int
+  created_at: String
+  updated_at: String
+
+  Activity: Activity
+}

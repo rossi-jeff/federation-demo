@@ -1,0 +1,14 @@
+type CustomDiscount {
+  id: ID!
+  organization_id: Int
+  kind: String
+  condition: Int
+  active: Boolean
+  discounted_fee: Int
+  activity_id: Int
+  secondary_condition: String
+  created_at: String
+  updated_at: String
+
+  Activity: Activity
+}

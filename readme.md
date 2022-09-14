@@ -14,6 +14,10 @@ edit .env file to contain your username for local postgress
 `npm run push:activities`
 `npm run push:people`
 
+## run codegen
+
+`npm run codegen`
+
 ## seed the databases
 
 `npm run seed`

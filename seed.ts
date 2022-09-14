@@ -1,7 +1,16 @@
 import { PrismaClient as activityDB } from "./generated/activity-db";
 import { PrismaClient as organizationDb } from "./generated/organization-db";
 import { PrismaClient as personDb } from "./generated/person-db";
-import { randCompanyName, randWord, randEmail, randFirstName, randLastName, randSports, randPassword, randPhoneNumber } from '@ngneat/falso';
+import {
+  randCompanyName,
+  randWord,
+  randEmail,
+  randFirstName,
+  randLastName,
+  randSports,
+  randPassword,
+  randPhoneNumber,
+} from "@ngneat/falso";
 
 const client = {
   activity: new activityDB(),
@@ -42,7 +51,7 @@ const seed = async () => {
         updated_at: now,
       };
       person = await client.person.person.create({ data });
-      console.log(`person: ${person.username}`)
+      console.log(`person: ${person.username}`);
     } // end people loop
     for (let a = 0; a < count.activities; a++) {
       data = {
@@ -52,7 +61,7 @@ const seed = async () => {
         updated_at: now,
       };
       activity = await client.activity.activity.create({ data });
-      console.log(`activity: ${activity.name}`)
+      console.log(`activity: ${activity.name}`);
     } // end activity loop
   } // end organization loop
 };

@@ -1,6 +1,14 @@
 import { Resolvers } from '../../../../generated/graphql';
+import { db } from '../db'
 
 export const Activity: Resolvers['Activity'] = {
+    __resolveReference: async (obj) => {
+        return await db.client.activity.findFirst({
+            where: {
+                id: obj.id
+            }
+        })
+    },
     name: (parent) => {
         return parent.name || null
     },

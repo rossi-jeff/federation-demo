@@ -1,8 +1,10 @@
 import { ApolloServer } from "apollo-server";
-import { ApolloGateway } from "@apollo/gateway";
+import { ApolloGateway, IntrospectAndCompose } from "@apollo/gateway";
 
 const gateway = new ApolloGateway({
-  serviceList: [{ name: "activities", url: "http://localhost:4001/graphql" }],
+  supergraphSdl: new IntrospectAndCompose({
+    subgraphs: [{ name: "activities", url: "http://localhost:4001/graphql" }],
+  }),
   __exposeQueryPlanExperimental: true,
 });
 

@@ -1,19 +1,21 @@
 import { loadFiles } from "@graphql-tools/load-files";
 import { ApolloServer } from "apollo-server";
 import { DocumentNode } from "graphql";
-import { buildFederatedSchema } from "@apollo/federation";
+import { buildSubgraphSchema } from "@apollo/federation";
 
 import { resolvers } from "./resolvers";
 
 const startUp = async () => {
   const typeDefs = (await loadFiles(
-    "../src/**/*.schema.graphql"
+    "./**/*.schema.graphql"
   )) as DocumentNode[];
 
-  const schema = buildFederatedSchema({
+  const schema = buildSubgraphSchema({
     typeDefs,
     resolvers,
   });
+
+  console.log({schema})
 
   const server = new ApolloServer({ schema });
 

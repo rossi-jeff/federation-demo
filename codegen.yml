@@ -3,9 +3,11 @@ schema: "services/**/*.schema.graphql"
 documents: null
 generates:
   generated/graphql.ts:
+    config:
+      federation: true
     plugins:
       - "typescript"
       - "typescript-resolvers"
 config:
   mappers:
-    Activity: "services/activities/src/activities/types#ActivityType"
+    Activity: "../services/activities/src/activities/types#ActivityType"

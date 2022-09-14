@@ -16,7 +16,7 @@
     "start:service:organizations": "nodemon services/organizations/src/server.ts",
     "start:service:people": "nodemon services/people/src/server.ts",
     "start:services": "concurrently \"npm:start:service:*\"",
-    "start:gateway": "nodemon gateway.ts",
+    "start:gateway": "nodemon services/gateway/gateway.ts",
     "seed": "ts-node seed.ts",
     "format": "prettier --write \"./services/**/*.{ts,tsx,json,graphql}\"",
     "lint": "eslint services --fix --ext .js,.jsx,.ts,.tsx"

@@ -2,6 +2,10 @@ import { loadFiles } from '@graphql-tools/load-files'
 import { ApolloServer } from 'apollo-server'
 import { DocumentNode } from 'graphql'
 import { buildSubgraphSchema } from '@apollo/federation'
+import {
+  ApolloServerPluginInlineTrace,
+  ApolloServerPluginLandingPageLocalDefault
+} from 'apollo-server-core'
 
 import { resolvers } from './resolvers'
 
@@ -13,7 +17,13 @@ const startUp = async (): Promise<void> => {
     resolvers
   })
 
-  const server = new ApolloServer({ schema })
+  const server = new ApolloServer({
+    schema,
+    plugins: [
+      ApolloServerPluginInlineTrace(),
+      ApolloServerPluginLandingPageLocalDefault({ embed: true })
+    ]
+  })
 
   server
     .listen({ port: 4003 })

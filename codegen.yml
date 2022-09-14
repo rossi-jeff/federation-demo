@@ -12,3 +12,4 @@ config:
   mappers:
     Activity: "../services/activities/src/activities/types#ActivityType"
     Organization: "../services/organizations/src/organizations/types#OrganizationType"
+    Person: "../services/people/src/people/types#PersonType"

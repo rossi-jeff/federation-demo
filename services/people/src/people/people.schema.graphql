@@ -1,4 +1,4 @@
-type Person {
+type Person @key(fields: "id") {
   id: ID!
   username: String
   password: String
@@ -53,4 +53,9 @@ type Person {
   MedicalConditions: [MedicalCondition]
   InviteSent: [Invite]
   InvitesReceived: [Invite]
+}
+
+extend type Query {
+  people: [Person]
+  person(id: ID!): Person
 }

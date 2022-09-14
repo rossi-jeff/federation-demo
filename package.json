@@ -14,6 +14,7 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "start:service:activities": "nodemon services/activities/src/server.ts",
     "start:service:organizations": "nodemon services/organizations/src/server.ts",
+    "start:service:people": "nodemon services/people/src/server.ts",
     "start:services": "concurrently \"npm:start:service:*\"",
     "start:gateway": "nodemon gateway.ts"
   },

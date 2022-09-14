@@ -1,3 +1,3 @@
-import { Person } from "../../../../generated/person-db";
+import { Person } from '../../../../generated/person-db'
 
-export type PersonType = Person;
+export type PersonType = Person

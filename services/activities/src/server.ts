@@ -1,29 +1,30 @@
-import { loadFiles } from "@graphql-tools/load-files";
-import { ApolloServer } from "apollo-server";
-import { DocumentNode } from "graphql";
-import { buildSubgraphSchema } from "@apollo/federation";
+import { loadFiles } from '@graphql-tools/load-files'
+import { ApolloServer } from 'apollo-server'
+import { DocumentNode } from 'graphql'
+import { buildSubgraphSchema } from '@apollo/federation'
 
-import { resolvers } from "./resolvers";
+import { resolvers } from './resolvers'
 
-const startUp = async () => {
-  const typeDefs = (await loadFiles(
-    "./**/*.schema.graphql"
-  )) as DocumentNode[];
+const startUp = async (): Promise<void> => {
+  const typeDefs = (await loadFiles('./**/*.schema.graphql')) as DocumentNode[]
 
   const schema = buildSubgraphSchema({
     typeDefs,
-    resolvers,
-  });
+    resolvers
+  })
 
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({ schema })
 
-  server.listen({ port: 4001 })
-    .then(({url}) => {
-        console.log(`Activity service started at ${url}`)
+  server
+    .listen({ port: 4001 })
+    .then(({ url }) => {
+      console.log(`Activity service started at ${url}`)
     })
     .catch((e) => {
-        console.error(e.message)
+      console.error(e.message)
     })
-};
+}
 
-startUp();
+startUp()
+  .then(() => console.log('Activity service is running'))
+  .catch(() => console.log('Error starting Activity service'))

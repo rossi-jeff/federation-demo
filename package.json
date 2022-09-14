@@ -13,6 +13,8 @@
     "push:people": "cd services/people/ && npx prisma db push",
     "codegen": "graphql-codegen --config codegen.yml",
     "start:service:activities": "nodemon services/activities/src/server.ts",
+    "start:service:organizations": "nodemon services/organizations/src/server.ts",
+    "start:services": "concurrently \"npm:start:service:*\"",
     "start:gateway": "nodemon gateway.ts"
   },
   "author": "Jeff Rossi",

@@ -11,3 +11,4 @@ generates:
 config:
   mappers:
     Activity: "../services/activities/src/activities/types#ActivityType"
+    Organization: "../services/organizations/src/organizations/types#OrganizationType"

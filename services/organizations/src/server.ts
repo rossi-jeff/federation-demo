@@ -6,9 +6,7 @@ import { buildSubgraphSchema } from "@apollo/federation";
 import { resolvers } from "./resolvers";
 
 const startUp = async () => {
-  const typeDefs = (await loadFiles(
-    "./**/*.schema.graphql"
-  )) as DocumentNode[];
+  const typeDefs = (await loadFiles("./**/*.schema.graphql")) as DocumentNode[];
 
   const schema = buildSubgraphSchema({
     typeDefs,
@@ -17,13 +15,14 @@ const startUp = async () => {
 
   const server = new ApolloServer({ schema });
 
-  server.listen({ port: 4001 })
-    .then(({url}) => {
-        console.log(`Activity service started at ${url}`)
+  server
+    .listen({ port: 4002 })
+    .then(({ url }) => {
+      console.log(`Organization service started at ${url}`);
     })
     .catch((e) => {
-        console.error(e.message)
-    })
+      console.error(e.message);
+    });
 };
 
 startUp();

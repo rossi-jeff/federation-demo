@@ -1,4 +1,4 @@
-type Organization {
+type Organization @key(fields: "id") {
   id: ID!
   name: String
   subdomain: String
@@ -46,4 +46,9 @@ type Organization {
   LegalVideos: [LegalVideo]
   MedicalForms: [MedicalForm]
   PaymentCodes: [PaymentCode]
+}
+
+extend type Query {
+  organizations: [Organization]
+  organization(id: ID!): Organization
 }

@@ -10,7 +10,9 @@ import {
 import { resolvers } from './resolvers'
 
 const startUp = async (): Promise<void> => {
-  const typeDefs = (await loadFiles('./**/*.schema.graphql')) as DocumentNode[]
+  const typeDefs = (await loadFiles(
+    'services/people/src/**/*.schema.graphql'
+  )) as DocumentNode[]
 
   const schema = buildSubgraphSchema({
     typeDefs,

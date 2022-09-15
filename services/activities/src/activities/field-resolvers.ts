@@ -1,5 +1,61 @@
 import { Resolvers } from '../../../../generated/graphql'
 import { db } from '../db'
+import { ActivityType } from './types'
+
+export const getName = (parent: ActivityType): string => {
+  return parent.name ?? null
+}
+export const getRegisterable = (parent: ActivityType): boolean => {
+  return parent.registerable ?? false
+}
+export const getOrganizationId = (parent: ActivityType): number | null => {
+  return parent.organization_id ?? null
+}
+export const getCreatedAt = (parent: ActivityType): string | null => {
+  return parent.created_at != null ? parent.created_at.toString() : null
+}
+export const getUpdatedAt = (parent: ActivityType): string | null => {
+  return parent.updated_at != null ? parent.updated_at.toString() : null
+}
+export const getSteps = (parent: ActivityType): number => {
+  return parent.steps ?? 0
+}
+export const getFee = (parent: ActivityType): number => {
+  return parent.fee ?? 0
+}
+export const getEmailFooter = (parent: ActivityType): string | null => {
+  return parent.email_footer ?? null
+}
+export const getTermsAndConditions = (parent: ActivityType): string | null => {
+  return parent.terms_and_conditions ?? null
+}
+export const getKind = (parent: ActivityType): string | null => {
+  return parent.kind ?? null
+}
+export const getLeadInMessage = (parent: ActivityType): string | null => {
+  return parent.lead_in_message ?? null
+}
+export const getNoCut = (parent: ActivityType): boolean => {
+  return parent.no_cut ?? false
+}
+export const getCurrentSeason = (parent: ActivityType): string | null => {
+  return parent.current_season ?? null
+}
+export const getDiscountedFee = (parent: ActivityType): number => {
+  return parent.discounted_fee ?? 0
+}
+export const getSpiritWearLink = (parent: ActivityType): string | null => {
+  return parent.spirit_wear_link ?? null
+}
+export const getAthleticSeason = (parent: ActivityType): string | null => {
+  return parent.athletic_season ?? null
+}
+export const getRosterwebserviceAccess = (parent: ActivityType): boolean => {
+  return parent.rosterwebservice_access ?? null
+}
+export const getArchived = (parent: ActivityType): boolean => {
+  return parent.archived ?? false
+}
 
 export const Activity: Resolvers['Activity'] = {
   __resolveReference: async (obj) => {
@@ -9,55 +65,22 @@ export const Activity: Resolvers['Activity'] = {
       }
     })
   },
-  name: (parent) => {
-    return parent.name ?? null
-  },
-  registerable: (parent) => {
-    return parent.registerable ?? false
-  },
-  created_at: (parent) => {
-    return parent.created_at != null ? parent.created_at.toString() : null
-  },
-  updated_at: (parent) => {
-    return parent.updated_at != null ? parent.updated_at.toString() : null
-  },
-  steps: (parent) => {
-    return parent.steps ?? 0
-  },
-  fee: (parent) => {
-    return parent.fee ?? 0
-  },
-  email_footer: (parent) => {
-    return parent.email_footer ?? null
-  },
-  terms_and_conditions: (parent) => {
-    return parent.terms_and_conditions ?? null
-  },
-  kind: (parent) => {
-    return parent.kind ?? null
-  },
-  lead_in_message: (parent) => {
-    return parent.lead_in_message ?? null
-  },
-  no_cut: (parent) => {
-    return parent.no_cut ?? false
-  },
-  current_season: (parent) => {
-    return parent.current_season ?? null
-  },
-  discounted_fee: (parent) => {
-    return parent.discounted_fee ?? 0
-  },
-  spirit_wear_link: (parent) => {
-    return parent.spirit_wear_link ?? null
-  },
-  athletic_season: (parent) => {
-    return parent.athletic_season ?? null
-  },
-  rosterwebservice_access: (parent) => {
-    return parent.rosterwebservice_access ?? null
-  },
-  archived: (parent) => {
-    return parent.archived ?? false
-  }
+  name: getName,
+  registerable: getRegisterable,
+  organization_id: getOrganizationId,
+  created_at: getCreatedAt,
+  updated_at: getUpdatedAt,
+  steps: getSteps,
+  fee: getFee,
+  email_footer: getEmailFooter,
+  terms_and_conditions: getTermsAndConditions,
+  kind: getKind,
+  lead_in_message: getLeadInMessage,
+  no_cut: getNoCut,
+  current_season: getCurrentSeason,
+  discounted_fee: getDiscountedFee,
+  spirit_wear_link: getSpiritWearLink,
+  athletic_season: getAthleticSeason,
+  rosterwebservice_access: getRosterwebserviceAccess,
+  archived: getArchived
 }

@@ -1,3 +1,3 @@
-import { Organization } from "../../../../generated/organization-db";
+import { Organization } from '../../../../generated/organization-db'
 
-export type OrganizationType = Organization;
+export type OrganizationType = Organization

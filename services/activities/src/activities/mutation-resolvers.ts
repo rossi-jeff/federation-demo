@@ -15,9 +15,10 @@ export const activityCreate: MutationResolvers['activityCreate'] = async (
 
   const now = new Date()
   const data: Prisma.ActivityCreateInput = {
+    name: '',
     created_at: now,
     updated_at: now,
-    ...input
+    ...(typeof input === 'object' ? input : {})
   }
 
   try {

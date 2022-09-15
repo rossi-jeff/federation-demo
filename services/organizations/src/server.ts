@@ -37,4 +37,4 @@ const startUp = async (): Promise<void> => {
 
 startUp()
   .then(() => console.log('Organization service is running'))
-  .catch(() => console.log('Error starting Organization service'))
+  .catch(() => console.log('Error starting Activity service'))

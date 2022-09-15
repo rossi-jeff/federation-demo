@@ -1,0 +1,14 @@
+federation_version: 2
+subgraphs:
+  activities:
+    routing_url: http://localhost:4001
+    schema:
+      subgraph_url: http://localhost:4001
+  organizations:
+    routing_url: http://localhost:4002
+    schema:
+      subgraph_url: http://localhost:4002
+  people:
+    routing_url: http://localhost:4003
+    schema:
+      subgraph_url: http://localhost:4003

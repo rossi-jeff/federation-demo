@@ -37,4 +37,4 @@ const startUp = async (): Promise<void> => {
 
 startUp()
   .then(() => console.log('Person service is running'))
-  .catch(() => console.log('Error starting Person service'))
+  .catch(() => console.log('Error starting Activity service'))

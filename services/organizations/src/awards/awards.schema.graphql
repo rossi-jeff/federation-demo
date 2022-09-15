@@ -9,3 +9,8 @@ type Award {
 
   Organization: Organization
 }
+
+extend type Query {
+  awards: [Award]
+  award(id: ID!): Award
+}

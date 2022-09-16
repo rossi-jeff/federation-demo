@@ -1,26 +1,27 @@
-import { ApolloServer } from 'apollo-server'
-import { ApolloGateway, IntrospectAndCompose } from '@apollo/gateway'
+import { ApolloServer } from "apollo-server";
+import { ApolloGateway, IntrospectAndCompose } from "@apollo/gateway";
 import {
   ApolloServerPluginInlineTrace,
-  ApolloServerPluginLandingPageLocalDefault
-} from 'apollo-server-core'
+  ApolloServerPluginLandingPageLocalDefault,
+} from "apollo-server-core";
+import { logger } from "../utils/logger";
 
 const services = [
-  { name: 'activities', url: 'http://localhost:4001' },
-  { name: 'organizations', url: 'http://localhost:4002' },
-  { name: 'people', url: 'http://localhost:4003' }
-]
+  { name: "activities", url: "http://localhost:4001" },
+  { name: "organizations", url: "http://localhost:4002" },
+  { name: "people", url: "http://localhost:4003" },
+];
 
 const supergraphSdl = new IntrospectAndCompose({
   subgraphs: services,
   pollIntervalInMs: 10000,
-  subgraphHealthCheck: true
-})
+  subgraphHealthCheck: true,
+});
 
 const gateway = new ApolloGateway({
   supergraphSdl,
-  __exposeQueryPlanExperimental: false
-})
+  __exposeQueryPlanExperimental: false,
+});
 
 const startUp = async (): Promise<void> => {
   const server = new ApolloServer({
@@ -28,20 +29,20 @@ const startUp = async (): Promise<void> => {
     debug: true,
     plugins: [
       ApolloServerPluginInlineTrace(),
-      ApolloServerPluginLandingPageLocalDefault({ embed: true })
-    ]
-  })
+      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+    ],
+  });
 
   server
     .listen()
     .then(({ url }) => {
-      console.log(`gateway started at ${url}`)
+      logger.info(`gateway started at ${url}`);
     })
     .catch((e) => {
-      console.error(e.message)
-    })
-}
+      logger.error(e.message);
+    });
+};
 
 startUp()
-  .then(() => console.log('Gateway is running'))
-  .catch(() => console.log('Error starting gateway'))
+  .then(() => logger.info("Gateway is running"))
+  .catch(() => logger.error("Error starting gateway"));

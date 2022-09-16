@@ -1,7 +1,4 @@
-import {
-  QueryOrganizationArgs,
-  QueryResolvers,
-} from "../../../../generated/graphql";
+import { QueryOrganizationArgs, QueryResolvers } from "../../generated/graphql";
 import { db } from "../db";
 
 export const organizations: QueryResolvers["organizations"] = async () => {

@@ -1,4 +1,4 @@
-import { QueryPersonArgs, QueryResolvers } from "../../../../generated/graphql";
+import { QueryPersonArgs, QueryResolvers } from "../../generated/graphql";
 import { db } from "../db";
 
 export const people: QueryResolvers["people"] = async () => {

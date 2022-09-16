@@ -1,0 +1,13 @@
+overwrite: true
+schema: "services/activities/**/*.schema.graphql"
+documents: null
+generates:
+  services/activities/generated/graphql.ts:
+    config:
+      federation: true
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+config:
+  mappers:
+    Activity: "../src/activities/types#ActivityType"

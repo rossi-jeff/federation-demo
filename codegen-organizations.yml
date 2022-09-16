@@ -1,0 +1,14 @@
+overwrite: true
+schema: "services/organizations/**/*.schema.graphql"
+documents: null
+generates:
+  services/organizations/generated/graphql.ts:
+    config:
+      federation: true
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+config:
+  mappers:
+    Award: "../src/awards/types#AwardType"
+    Organization: "../src/organizations/types#OrganizationType"

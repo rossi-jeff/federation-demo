@@ -2,7 +2,7 @@ import {
   MutationResolvers,
   MutationAwardCreateArgs,
   MutationAwardUpdateArgs,
-} from "../../../../generated/graphql";
+} from "../../generated/graphql";
 import { createArgs, updateArgs } from "../../../utils/check-args";
 import { Prisma } from "../../../../generated/organization-db";
 import { db } from "../db";

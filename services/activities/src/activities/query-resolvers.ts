@@ -1,7 +1,4 @@
-import {
-  QueryResolvers,
-  QueryActivityArgs,
-} from "../../../../generated/graphql";
+import { QueryResolvers, QueryActivityArgs } from "../../generated/graphql";
 import { db } from "../db";
 import { idArgs } from "../../../utils/check-args";
 import { Activity } from "../../../../generated/activity-db";

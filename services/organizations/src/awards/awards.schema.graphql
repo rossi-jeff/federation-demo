@@ -10,7 +10,19 @@ type Award {
   Organization: Organization
 }
 
+input AwardInput {
+  name: String
+  position: Int
+  organization_id: Int
+  active: Boolean
+}
+
 extend type Query {
   awards: [Award]
   award(id: ID!): Award
+}
+
+extend type Mutation {
+  awardCreate(input: AwardInput): Award
+  awardUpdate(id: ID!, updates: AwardInput): Award
 }

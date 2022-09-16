@@ -1,4 +1,5 @@
 import { Resolvers } from '../../../../generated/graphql'
+import { db } from '../db'
 import { AwardType } from './types'
 
 export const getName = (parent: AwardType): string | null => {
@@ -26,5 +27,13 @@ export const Award: Resolvers['Award'] = {
   organization_id: getOrganizationId,
   active: getActive,
   created_at: getCreatedAt,
-  updated_at: getUpdatedAt
+  updated_at: getUpdatedAt,
+  Organization: async (parent) => {
+    if (parent.organization_id === null) return null
+    return await db.client.organization.findFirst({
+      where: {
+        id: parent.organization_id
+      }
+    })
+  }
 }

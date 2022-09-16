@@ -14,5 +14,12 @@ export const Organization: Resolvers['Organization'] = {
   },
   updated_at: (parent) => {
     return parent.updated_at != null ? parent.updated_at.toString() : null
+  },
+  Awards: async (parent) => {
+    return await db.client.award.findMany({
+      where: {
+        organization_id: parent.id
+      }
+    })
   }
 }

@@ -2,7 +2,7 @@
   "name": "federation-demo",
   "version": "1.0.0",
   "description": "demo for apollo federation",
-  "main": "gateway.ts",
+  "main": "services/gateway/gateway.ts",
   "scripts": {
     "test": "jest",
     "generate:organizations": "cd services/organizations/ && npx prisma generate",
@@ -22,6 +22,11 @@
     "format": "prettier --write \"./services/**/*.{ts,tsx,json,graphql}\"",
     "lint": "eslint services --fix --ext .js,.jsx,.ts,.tsx",
     "start": "concurrently \"npm:start:services\" \"npm:delayed:gateway\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run format && npm run lint"
+    }
   },
   "author": "Jeff Rossi",
   "license": "ISC",

@@ -48,7 +48,52 @@ type Organization @key(fields: "id") {
   PaymentCodes: [PaymentCode]
 }
 
+input OrganizationInput {
+  name: String
+  subdomain: String
+  active: Boolean
+  a2k_link_school_id: Int
+  color1: String
+  color2: String
+  sub_merchant_id: String
+  latitude: String
+  longitude: String
+  phone: String
+  fax: String
+  mascot: String
+  feeder_towns: String
+  address_id: Int
+  flat_fee: Int
+  percentage_fee: Int
+  manual_fee: Int
+  cc_fee: Int
+  taking_payments: Boolean
+  payment_options: Int
+  spending_cap_max: Int
+  payment_code: String
+  sms_messaging: Boolean
+  flat_fee_camp: Int
+  percentage_fee_camp: Int
+  flat_fee_event: Int
+  percentage_fee_event: Int
+  oh_physical_url: String
+  notifications: Int
+  notes: String
+  flat_fee_band: Int
+  percentage_fee_band: Int
+  custom_website_url: String
+  features: Int
+  kind: String
+  tracked: Boolean
+  ach_flat_fee: Int
+}
+
 extend type Query {
   organizations: [Organization]
   organization(id: ID!): Organization
+}
+
+extend type Mutation {
+  organizationCreate(input: OrganizationInput): Organization
+  organizationUpdate(id: ID!, updates: OrganizationInput): Organization
 }

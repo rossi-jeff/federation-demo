@@ -9,13 +9,13 @@ export const getUpdatedAt = (parent: OrganizationType): string | null => {
   return parent.updated_at != null ? parent.updated_at.toString() : null
 }
 
-export const Organization: Resolvers['Organization'] = {
+export const Organization: Resolvers["Organization"] = {
   __resolveReference: async (obj) => {
     return await db.client.organization.findFirst({
       where: {
-        id: obj.id
-      }
-    })
+        id: obj.id,
+      },
+    });
   },
   created_at: getCreatedAt,
   updated_at: getUpdatedAt

@@ -1,42 +1,43 @@
-import { loadFiles } from '@graphql-tools/load-files'
-import { ApolloServer } from 'apollo-server'
-import { DocumentNode } from 'graphql'
-import { buildSubgraphSchema } from '@apollo/federation'
+import { loadFiles } from "@graphql-tools/load-files";
+import { ApolloServer } from "apollo-server";
+import { DocumentNode } from "graphql";
+import { buildSubgraphSchema } from "@apollo/federation";
 import {
   ApolloServerPluginInlineTrace,
-  ApolloServerPluginLandingPageLocalDefault
-} from 'apollo-server-core'
+  ApolloServerPluginLandingPageLocalDefault,
+} from "apollo-server-core";
+import { logger } from "../../utils/logger";
 
-import { resolvers } from './resolvers'
+import { resolvers } from "./resolvers";
 
 const startUp = async (): Promise<void> => {
   const typeDefs = (await loadFiles(
-    'services/people/src/**/*.schema.graphql'
-  )) as DocumentNode[]
+    "services/people/src/**/*.schema.graphql"
+  )) as DocumentNode[];
 
   const schema = buildSubgraphSchema({
     typeDefs,
-    resolvers
-  })
+    resolvers,
+  });
 
   const server = new ApolloServer({
     schema,
     plugins: [
       ApolloServerPluginInlineTrace(),
-      ApolloServerPluginLandingPageLocalDefault({ embed: true })
-    ]
-  })
+      ApolloServerPluginLandingPageLocalDefault({ embed: true }),
+    ],
+  });
 
   server
     .listen({ port: 4003 })
     .then(({ url }) => {
-      console.log(`People service started at ${url}`)
+      logger.info(`People service started at ${url}`);
     })
     .catch((e) => {
-      console.error(e.message)
-    })
-}
+      logger.error(e.message);
+    });
+};
 
 startUp()
-  .then(() => console.log('Person service is running'))
-  .catch(() => console.log('Error starting Activity service'))
+  .then(() => logger.info("Person service is running"))
+  .catch(() => logger.error("Error starting Activity service"));

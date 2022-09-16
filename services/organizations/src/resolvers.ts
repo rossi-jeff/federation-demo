@@ -9,11 +9,11 @@ import { organization, organizations } from './organizations/query-resolvers'
 export const resolvers: Resolvers = {
   Query: {
     organizations,
-    organization
+    organization,
   },
   Mutation: {
     organizationCreate,
     organizationUpdate
   },
-  Organization
-}
+  Organization,
+};

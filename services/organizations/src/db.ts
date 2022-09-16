@@ -1,7 +1,7 @@
-import { PrismaClient } from '../../../generated/organization-db'
+import { PrismaClient } from "../../../generated/organization-db";
 
-const client = new PrismaClient()
+const client = new PrismaClient();
 
 export const db = {
-  client
-}
+  client,
+};

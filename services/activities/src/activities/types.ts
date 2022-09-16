@@ -1,3 +1,3 @@
-import { Activity } from '../../../../generated/activity-db'
+import { Activity } from "../../../../generated/activity-db";
 
-export type ActivityType = Activity
+export type ActivityType = Activity;

@@ -10,12 +10,12 @@ export const resolvers: Resolvers = {
     awards,
     award,
     organizations,
-    organization
+    organization,
   },
   Mutation: {
     awardCreate,
     awardUpdate
   },
   Award,
-  Organization
-}
+  Organization,
+};

@@ -1,14 +1,13 @@
-import { Resolvers } from '../../../generated/graphql'
-import { Award } from './awards/field-resolvers'
-import { awardCreate, awardUpdate } from './awards/mutation-resolvers'
-import { award, awards } from './awards/query-resolvers'
-import { organization, organizations } from './organizations/query-resolvers'
+import { Resolvers } from "../../../generated/graphql";
+import { Award } from "./awards/field-resolvers";
+import { awardCreate, awardUpdate } from "./awards/mutation-resolvers";
+import { award, awards } from "./awards/query-resolvers";
+import { organization, organizations } from "./organizations/query-resolvers";
 import {
   organizationCreate,
-  organizationUpdate
-} from './organizations/mutation-resolvers'
-import { Organization } from './organizations/fields-resolvers'
-
+  organizationUpdate,
+} from "./organizations/mutation-resolvers";
+import { Organization } from "./organizations/field-resolvers";
 
 export const resolvers: Resolvers = {
   Query: {
@@ -21,7 +20,7 @@ export const resolvers: Resolvers = {
     awardCreate,
     awardUpdate,
     organizationCreate,
-    organizationUpdate
+    organizationUpdate,
   },
   Award,
   Organization,

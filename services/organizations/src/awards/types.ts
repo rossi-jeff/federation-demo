@@ -1,3 +1,3 @@
-import { Award } from '../../../../generated/organization-db'
+import { Award } from "../../../../generated/organization-db";
 
-export type AwardType = Award
+export type AwardType = Award;

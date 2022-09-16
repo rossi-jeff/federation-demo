@@ -11,5 +11,6 @@ generates:
 config:
   mappers:
     Activity: "../services/activities/src/activities/types#ActivityType"
+    Award: "../services/organizations/src/awards/types#AwardType"
     Organization: "../services/organizations/src/organizations/types#OrganizationType"
     Person: "../services/people/src/people/types#PersonType"

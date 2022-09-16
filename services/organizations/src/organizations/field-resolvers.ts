@@ -19,4 +19,11 @@ export const Organization: Resolvers["Organization"] = {
   },
   created_at: getCreatedAt,
   updated_at: getUpdatedAt
-}
+  Awards: async (parent) => {
+    return await db.client.award.findMany({
+      where: {
+        organization_id: parent.id
+      }
+    })
+  }
+};

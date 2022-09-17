@@ -5,7 +5,7 @@ import {
   activityUpdate,
 } from "./activities/mutation-resolvers";
 import { activities, activity } from "./activities/query-resolvers";
-// import { Organization } from "./organizations/field-resolvers";
+import { Organization } from "./organizations/field-resolvers";
 
 export const resolvers: Resolvers = {
   Query: {
@@ -17,4 +17,5 @@ export const resolvers: Resolvers = {
     activityUpdate,
   },
   Activity,
+  Organization,
 };

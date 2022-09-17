@@ -13,7 +13,7 @@ export const Organization: Resolvers["Organization"] = {
   __resolveReference: async (obj) => {
     return await db.client.organization.findFirst({
       where: {
-        id: obj.id,
+        id: parseInt(obj.id.toString()),
       },
     });
   },

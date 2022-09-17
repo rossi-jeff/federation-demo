@@ -16,3 +16,27 @@ type CustomQuestion {
 
   Organization: Organization
 }
+
+input CustomQuestionInput {
+  organization_id: Int
+  state: String
+  question: String
+  question_type: String
+  question_options: String
+  active: Boolean
+  required: Boolean
+  dependent_on: Int
+  dependent_answer: String
+  sort_order: Int
+  activity_type: String
+}
+
+extend type Query {
+  customQuestions: [CustomQuestion]
+  customQuestion(id: ID!): CustomQuestion
+}
+
+extend type Mutation {
+  customQuestionCreate(input: CustomQuestionInput): CustomQuestion
+  customQuestionUpdate(id: ID!, updates: CustomQuestionInput): CustomQuestion
+}

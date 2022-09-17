@@ -13,6 +13,8 @@ import {
   randBoolean,
   randNumber,
   randCatchPhrase,
+  randState,
+  randPhrase,
 } from "@ngneat/falso";
 
 const client = {
@@ -26,6 +28,7 @@ const count = {
   people: 5,
   activities: 5,
   awards: 3,
+  questions: 2,
 };
 
 const clear = async () => {
@@ -36,12 +39,13 @@ const clear = async () => {
   await client.person.person.deleteMany({});
   // organizarion db
   await client.organization.award.deleteMany({});
+  await client.organization.customQuestion.deleteMany({});
   await client.organization.organization.deleteMany({});
 };
 
 const seed = async () => {
   const now = new Date();
-  let data, organization, person, activity, award;
+  let data, organization, person, activity, award, question;
   for (let o = 0; o < count.organizations; o++) {
     data = {
       name: randCompanyName(),
@@ -65,6 +69,25 @@ const seed = async () => {
       award = await client.organization.award.create({ data });
       console.log(`award: ${award.name}`);
     } // end award loop
+    for (let q = 0; q < count.questions; q++) {
+      data = {
+        organization_id: organization.id,
+        state: randState(),
+        question: randPhrase(),
+        question_type: randCatchPhrase(),
+        question_options: randCatchPhrase(),
+        active: randBoolean(),
+        required: randBoolean(),
+        dependent_on: randNumber({ min: 1, max: 1000 }),
+        dependent_answer: randCatchPhrase(),
+        sort_order: randNumber({ min: 1, max: 1000 }),
+        activity_type: randSports(),
+        created_at: now,
+        updated_at: now,
+      };
+      question = await client.organization.customQuestion.create({ data });
+      console.log(`custom question: ${question.question}`);
+    } // end question loop
     for (let p = 0; p < count.people; p++) {
       data = {
         username: randEmail(),

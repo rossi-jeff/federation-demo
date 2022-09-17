@@ -26,4 +26,11 @@ export const Organization: Resolvers["Organization"] = {
       },
     });
   },
+  CustomQuestions: async (parent) => {
+    return await db.client.customQuestion.findMany({
+      where: {
+        organization_id: parent.id,
+      },
+    });
+  },
 };

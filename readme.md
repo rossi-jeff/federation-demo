@@ -10,9 +10,7 @@ edit .env file to contain your username for local postgress
 
 ## install db local
 
-`npm run push:organizations`
-`npm run push:activities`
-`npm run push:people`
+`npm run push`
 
 ## run codegen
 

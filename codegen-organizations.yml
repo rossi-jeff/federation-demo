@@ -11,4 +11,5 @@ generates:
 config:
   mappers:
     Award: "../src/awards/types#AwardType"
+    CustomQuestion: "../src/custom_questions/types#CustomQuestionType"
     Organization: "../src/organizations/types#OrganizationType"

@@ -1,0 +1,13 @@
+overwrite: true
+schema: "services/people/**/*.schema.graphql"
+documents: null
+generates:
+  services/people/generated/graphql.ts:
+    config:
+      federation: true
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"
+config:
+  mappers:
+    Person: "../src/people/types#PersonType"

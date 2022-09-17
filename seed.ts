@@ -1,6 +1,6 @@
-import { PrismaClient as activityDB } from "./generated/activity-db";
-import { PrismaClient as organizationDb } from "./generated/organization-db";
-import { PrismaClient as personDb } from "./generated/person-db";
+import { PrismaClient as activityDB } from "./services/activities/generated/activity-db";
+import { PrismaClient as organizationDb } from "./services/organizations/generated/organization-db";
+import { PrismaClient as personDb } from "./services/people/generated/person-db";
 import {
   randCompanyName,
   randWord,

@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../../generated/activity-db";
+import { PrismaClient } from "../generated/activity-db";
 
 const client = new PrismaClient();
 

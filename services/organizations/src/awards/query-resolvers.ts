@@ -1,5 +1,5 @@
 import { db } from "../db";
-import { QueryResolvers, QueryAwardArgs } from "../../../../generated/graphql";
+import { QueryResolvers, QueryAwardArgs } from "../../generated/graphql";
 import { idArgs } from "../../../utils/check-args";
 
 export const awards: QueryResolvers["awards"] = async () => {

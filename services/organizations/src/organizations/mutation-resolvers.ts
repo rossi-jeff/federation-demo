@@ -2,9 +2,9 @@ import {
   MutationResolvers,
   MutationOrganizationCreateArgs,
   MutationOrganizationUpdateArgs,
-} from "../../../../generated/graphql";
+} from "../../generated/graphql";
 import { createArgs, updateArgs } from "../../../utils/check-args";
-import { Prisma } from "../../../../generated/organization-db";
+import { Prisma } from "../../generated/organization-db";
 import { db } from "../db";
 
 export const organizationCreate: MutationResolvers["organizationCreate"] =

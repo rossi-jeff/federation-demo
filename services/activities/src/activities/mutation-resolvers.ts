@@ -2,9 +2,9 @@ import {
   MutationActivityCreateArgs,
   MutationActivityUpdateArgs,
   MutationResolvers,
-} from "../../../../generated/graphql";
+} from "../../generated/graphql";
 import { db } from "../db";
-import { Prisma } from "../../../../generated/activity-db";
+import { Prisma } from "../../generated/activity-db";
 import { createArgs, updateArgs } from "../../../utils/check-args";
 
 export const activityCreate: MutationResolvers["activityCreate"] = async (

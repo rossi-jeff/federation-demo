@@ -1,4 +1,4 @@
-import { Resolvers } from "../../../generated/graphql";
+import { Resolvers } from "../generated/graphql";
 import { Activity } from "./activities/field-resolvers";
 import {
   activityCreate,

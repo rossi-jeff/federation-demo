@@ -1,7 +1,7 @@
 import {
   QueryCustomQuestionArgs,
   QueryResolvers,
-} from "../../../../generated/graphql";
+} from "../../generated/graphql";
 import { idArgs } from "../../../utils/check-args";
 import { db } from "../db";
 

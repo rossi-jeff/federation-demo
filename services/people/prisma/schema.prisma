@@ -5,7 +5,7 @@ datasource db {
 
 generator client {
     provider = "prisma-client-js"
-    output = "../../../generated/person-db"
+    output = "../generated/person-db"
 }
 
 model Affiliation {

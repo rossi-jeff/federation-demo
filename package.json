@@ -26,7 +26,8 @@
     "seed": "ts-node seed.ts",
     "format": "prettier --write \"./services/**/*.{ts,tsx,json,graphql}\"",
     "lint": "eslint services --fix --ext .js,.jsx,.ts,.tsx",
-    "start": "concurrently \"npm:start:services\" \"npm:delayed:gateway\""
+    "start": "concurrently \"npm:start:services\" \"npm:delayed:gateway\"",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {

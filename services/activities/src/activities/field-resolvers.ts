@@ -83,4 +83,11 @@ export const Activity: Resolvers["Activity"] = {
   athletic_season: getAthleticSeason,
   rosterwebservice_access: getRosterwebserviceAccess,
   archived: getArchived,
+  Organization: (ref) => {
+    if (ref.organization_id === null) return null;
+    return {
+      __typename: "Organization",
+      id: ref.organization_id?.toString(),
+    };
+  },
 };

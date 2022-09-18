@@ -1,3 +1,3 @@
-services/activities/generated/
-services/people/generated/
-services/organizations/generated/
+services/activities/generated/*
+services/people/generated/*
+services/organizations/generated/*

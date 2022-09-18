@@ -1,0 +1,4 @@
+extend type Organization @key(fields: "id") {
+  id: ID!
+  People: [Person]
+}

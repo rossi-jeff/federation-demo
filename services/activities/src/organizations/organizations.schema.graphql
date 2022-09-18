@@ -1,0 +1,4 @@
+type Organization @key(fields: "id") {
+  id: ID!
+  Activities: [Activity]
+}

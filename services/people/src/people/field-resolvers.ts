@@ -45,4 +45,11 @@ export const Person: Resolvers["Person"] = {
   concussion_test_date: getConcussionTestDate,
   created_at: getCreatedAt,
   updated_at: getUpdatedAt,
+  Organization: (ref) => {
+    if (ref.registered_with_organization_id === null) return null;
+    return {
+      __typename: "Organization",
+      id: ref.registered_with_organization_id?.toString(),
+    };
+  },
 };

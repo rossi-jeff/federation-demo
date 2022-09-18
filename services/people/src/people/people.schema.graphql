@@ -53,6 +53,7 @@ type Person @key(fields: "id") {
   MedicalConditions: [MedicalCondition]
   InviteSent: [Invite]
   InvitesReceived: [Invite]
+  Organization: Organization
 }
 
 extend type Query {

@@ -28,6 +28,7 @@ type Activity @key(fields: "id") {
   Registrations: [Registration]
   Settlements: [Settlement]
   Ventures: [Venture]
+  Organization: Organization
 }
 
 input ActivityInput {
